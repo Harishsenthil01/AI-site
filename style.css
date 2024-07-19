@@ -799,12 +799,7 @@ display: grid;
     .content-grid{
         display: block;
     }
-    .button1{
-        padding: 12px 70px;
-    }
-    .button2{
-        padding: 15px 35px;
-    }
+   
     .layout1{
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
