@@ -106,3 +106,17 @@ modal.addEventListener("click", (event) =>{
         event.preventDefault();
         formFailure.style.display = "block";
     });
+    document.addEventListener("DOMContentLoaded", () => {
+        const icon = document.querySelector(".solid i");
+        const dropdown = document.querySelector(".dropdown");
+
+        icon.addEventListener("click", () => {
+            dropdown.classList.toggle("hidden");
+            if (dropdown.classList.contains("hidden")) {
+                dropdown.style.display = "none";
+            } else {
+                dropdown.style.display = "block";
+            }
+        });
+    });
+
