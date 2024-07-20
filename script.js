@@ -1,41 +1,21 @@
-const bar = document.getElementById('bar');
-const cancel = document.getElementById('cancel');
-const menuTopics = document.querySelector('.menu-topics')
-bar.addEventListener('click', () => {
-    cancel.style.display = "block";
-    menuTopics.style.display = "block"
-    bar.style.display = "none";
-});
-cancel.addEventListener('click', () => {
-    bar.style.display = "block";
-    cancel.style.display = "none";
-    menuTopics.style.display = "none"
-});
-// const home = document.getElementById('home')
-// home.addEventListener('click', () => {
-//     window.location.href = '/index.html';
-// });
-// const artwork = document.getElementById('artwork')
-// artwork.addEventListener('click', () => {
-//     window.location.href = '/artworks.html';
-// });
-// const favourites = document.getElementById('favourites')
-// favourites.addEventListener('click', () => {
-//     window.location.href = '/favourites.html';
-// });
-// const subscription = document.getElementById('subscription')
-// subscription.addEventListener('click', () => {
-//     window.location.href = '/subscription.html';
-// });
-// const house = document.getElementById('house')
-// house.addEventListener('click', () => {
-//     window.location.href = '/index.html';
-// });
-// console.log('home', home,artwork,favourites,subscription,house)
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
+    const bar = document.getElementById('bar');
+    const cancel = document.getElementById('cancel');
+    const menuTopics = document.querySelector('.menu-topics');
+
+    bar.addEventListener('click', () => {
+        cancel.style.display = "block";
+        menuTopics.style.display = "block";
+        bar.style.display = "none";
+    });
+
+    cancel.addEventListener('click', () => {
+        bar.style.display = "block";
+        cancel.style.display = "none";
+        menuTopics.style.display = "none";
+    });
+
+    // Fetch and display JSON data
     const frames = document.getElementById("loops");
 
     function fetchJSONData() {
@@ -51,25 +31,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 data.user.forEach((user) => {
                     frameHTML += `
                         <div class="card">
-                            
-                                <img id="top" src="${user.image}" alt="img">
-                                <p class="heart-emoji">${user.emoji}</p>
-                                <div class="text-comp">
+                            <img id="top" src="${user.image}" alt="img">
+                            <p class="heart-emoji">${user.emoji}</p>
+                            <div class="text-comp">
                                 <div class="image-name">
                                     <img src="${user.url}" alt="img" class="profile3">
                                     <p class="desc">${user.name}</p>
                                 </div>
-                                    <p class="style">${user.picname}</p>
-                                    <p class="text-group3">${user.para}</p>
-                                    <p class="text">${user.remix}</p>
-                                </div>
-                            
+                                <p class="style">${user.picname}</p>
+                                <p class="text-group3">${user.para}</p>
+                                <p class="text">${user.remix}</p>
+                            </div>
                         </div>
                     `;
                 });
                 frames.innerHTML = frameHTML;
 
-                // Attach event listeners using event delegation
+                // Event delegation for dynamically created elements
                 frames.addEventListener('click', (event) => {
                     if (event.target.classList.contains('date') || event.target.classList.contains('block')) {
                         event.target.classList.toggle('active');
@@ -81,23 +59,23 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Call the function to fetch and display the data
     fetchJSONData();
-});
-const btn = document.querySelector(".btn");
-const formSuccess = document.querySelector(".form-success");
-const formContent = document.querySelector(".form-content");
 
-btn.addEventListener("click", (event) => {
-    event.preventDefault(); // Prevent the form from submitting
-    formSuccess.style.display = "block";
-    formContent.style.display = "none";
-});
-const modal = document.querySelector(".modal");
-modal.addEventListener("click", (event) =>{
-    event.preventDefault(); // Prevent the form from submitting
+    const btn = document.querySelector(".btn");
+    const formSuccess = document.querySelector(".form-success");
+    const formContent = document.querySelector(".form-content");
+
+    btn.addEventListener("click", (event) => {
+        event.preventDefault();
+        formSuccess.style.display = "block";
+        formContent.style.display = "none";
+    });
+
+    const modal = document.querySelector(".modal");
+    modal.addEventListener("click", (event) => {
+        event.preventDefault();
         alert("Password cannot be submitted");
-});
+    });
 
     const button4 = document.querySelector(".button4");
     const formFailure = document.querySelector(".form-failures");
@@ -106,17 +84,21 @@ modal.addEventListener("click", (event) =>{
         event.preventDefault();
         formFailure.style.display = "block";
     });
-    document.addEventListener("DOMContentLoaded", () => {
-        const icon = document.querySelector(".solid i");
-        const dropdown = document.querySelector(".dropdown");
 
-        icon.addEventListener("click", () => {
-            dropdown.classList.toggle("hidden");
-            if (dropdown.classList.contains("hidden")) {
-                dropdown.style.display = "none";
-            } else {
-                dropdown.style.display = "block";
-            }
-        });
+    const icon = document.querySelector(".solid i");
+    const dropdown = document.querySelector(".dropdown");
+
+    icon.addEventListener("click", () => {
+        dropdown.classList.toggle("hidden");
+        dropdown.style.display = dropdown.classList.contains("hidden") ? "none" : "block";
     });
 
+    const icons = document.querySelectorAll(".solid i");
+
+    icons.forEach(icon => {
+        icon.addEventListener("click", () => {
+            const dropdown = icon.nextElementSibling;
+            dropdown.style.display = dropdown.style.display === "none" || dropdown.style.display === "" ? "block" : "none";
+        });
+    });
+});
